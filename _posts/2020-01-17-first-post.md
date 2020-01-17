@@ -4,8 +4,18 @@ title: hoge
 
 # this is my first post
 
-enjoy!
-
 - x
 - y
 - z
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("hello")
+}
+
+```
