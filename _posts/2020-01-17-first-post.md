@@ -1,5 +1,6 @@
 # this is my first post
 
+1. TOC
 {:toc}
 
 ## マークダウン
