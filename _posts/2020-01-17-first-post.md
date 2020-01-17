@@ -1,13 +1,15 @@
----
-title: hoge
----
-
 # this is my first post
 
-- x
+{:toc}
+
+- 数式はLatexで書ける
+
+$$
+\sum_n (x)
+$$
+
 - y
 - z
-
 
 ```go
 package main
@@ -17,5 +19,4 @@ import "fmt"
 func main() {
   fmt.Println("hello")
 }
-
 ```
