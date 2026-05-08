@@ -39,3 +39,7 @@ kramdown:
 
 exclude:
   - CLAUDE.md
+  - vendor/
+  - node_modules/
+  - Gemfile
+  - Gemfile.lock
