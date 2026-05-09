@@ -1,4 +1,11 @@
 # About
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+u110 (ゆーいちまる) のブログです。
 
+データエンジニアリング周辺を仕事で触っています。ハマったことや調べたことの備忘録を中心に、ぽつぽつ書いていく場所です。
+
+## Links
+
+- GitHub: [u110](https://github.com/u110)
+- X (Twitter): [@yuu_ito](https://twitter.com/yuu_ito)
+- Email: web.u.project@gmail.com
