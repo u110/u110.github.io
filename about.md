@@ -8,4 +8,4 @@ u110 のブログです。
 
 - GitHub: [u110](https://github.com/u110)
 - X (Twitter): [@yuu_ito](https://twitter.com/yuu_ito)
-- Email: web.u.project@gmail.com
+- Email: <a href="mailto:web.u.project+fromu110githubio@gmail.com">web.u.project@gmail.com</a>
