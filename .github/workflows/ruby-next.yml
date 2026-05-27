@@ -1,0 +1,55 @@
+name: Ruby Next Build Check
+
+on:
+  schedule:
+    # 毎月 1 日 00:00 UTC (= JST 09:00)
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    inputs:
+      ruby_versions:
+        description: '空なら .ruby-version より新しい安定マイナー + head を自動算出。手動指定する場合は JSON 配列 (例: ["4.0","4.1","head"])'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  resolve-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.compute.outputs.versions }}
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases/tag/v5.0.1
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Compute Ruby version matrix
+        id: compute
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MANUAL_INPUT: ${{ inputs.ruby_versions }}
+        run: .github/scripts/resolve-ruby-matrix.sh
+
+  build-next:
+    needs: resolve-matrix
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ${{ fromJSON(needs.resolve-matrix.outputs.versions) }}
+    steps:
+      - name: Checkout
+        # https://github.com/actions/checkout/releases/tag/v5.0.1
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Setup Ruby (${{ matrix.ruby }})
+        # https://github.com/ruby/setup-ruby/releases/tag/v1.306.0
+        uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          cache-version: 0
+      - name: Build with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
