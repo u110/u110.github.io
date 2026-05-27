@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   resolve-matrix:
@@ -53,3 +54,10 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+      - name: Notify failure to tracking issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUBY_VERSION: ${{ matrix.ruby }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: .github/scripts/notify-ruby-next-failure.sh
